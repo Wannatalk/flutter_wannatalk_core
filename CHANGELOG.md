@@ -14,3 +14,7 @@
 ## 0.0.4
 
 - Migrate to null safety
+
+## 0.0.5
+
+- Migrate to null safety
