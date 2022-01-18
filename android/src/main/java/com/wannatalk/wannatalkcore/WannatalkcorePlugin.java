@@ -51,7 +51,9 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
 
     if (channel == null || plugin == null) {
-      channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "wannatalkcore");
+
+      channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "wannatalkcore");
+//      channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "wannatalkcore");
       plugin = new WannatalkcorePlugin();
       channel.setMethodCallHandler(plugin);
       plugin.initialize();
