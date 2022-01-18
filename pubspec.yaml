@@ -4,7 +4,8 @@ version: 0.0.5
 homepage: https://github.com/Wannatalk/flutter_wannatalk_core
 environment:
   sdk: ">=2.12.0 <3.0.0"
-
+  flutter: ">=1.10.0"
+  
 dependencies:
   flutter:
     sdk: flutter
@@ -32,11 +33,6 @@ flutter:
         pluginClass: WannatalkcorePlugin
       ios:
         pluginClass: WannatalkcorePlugin
-environment:
-  sdk: ">=2.12.0 <3.0.0"
-  # Flutter versions prior to 1.10 did not support
-  # the flutter.plugin.platforms map.
-  flutter: ">=1.10.0"
   
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
