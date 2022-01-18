@@ -18,3 +18,7 @@
 ## 0.0.5
 
 - Migrate to null safety
+
+## 0.0.6
+
+- Fixes
