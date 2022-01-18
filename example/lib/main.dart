@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  // Platform messages are asynchronous, so we intialize in an async method.
   Future<void> initPlatformState() async {
     bool loggedIn = await Wannatalkcore.isUserLoggedIn;
 
@@ -56,8 +56,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void silentLogin() {
-    String userIdentifier = "<user_identifier>";
-    Map userInfo = { "displayname": "Guest", "key1": "Value1", "key2": "Value2"};
+    String userIdentifier = "+919000220455";
+    Map userInfo = { "displayname": "SG"};
 
     Wannatalkcore.silentLogin(userIdentifier, userInfo, onCompletion: (WTResult result) {
       if (result.success) {

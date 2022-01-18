@@ -1,7 +1,6 @@
 package com.wannatalk.wannatalkcore;
 
 
-import android.support.annotation.NonNull;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 
@@ -22,6 +21,8 @@ import android.util.Log;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;

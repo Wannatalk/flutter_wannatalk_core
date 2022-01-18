@@ -1,6 +1,7 @@
 package com.wannatalk.wannatalkcore;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.Map;
 
@@ -21,13 +22,14 @@ public class WTConfigHandler {
     static final int _kWTConfigShowChatParticipants = 9011;
     static final int _kWTConfigEnableChatProfile = 9012;
     static final int _kWTConfigAllowModifyChatProfile = 9013;
+    static final int _kWTConfigSetAgentQueueInterval = 9014;
 
     static final String _cShow = "show";
     static final String _cEnable = "enable";
     static final String _cAllow = "allow";
 
     static final String _cTimeoutInterval = "timeoutInterval";
-
+    static final  String _cTimeInterval = "timeInterval";
 
     public static void HandleMethodType(int methodType, Map<String, Object> args, @NonNull MethodChannel.Result result) {
 
@@ -39,6 +41,11 @@ public class WTConfigHandler {
             case _kWTConfigSetInactiveChatTimeout: {
                 long interval = (long) args.get(_cTimeoutInterval);
                 SetInactiveChatTimeoutInterval(interval);
+                break;
+            }
+            case _kWTConfigSetAgentQueueInterval: {
+                long interval = (long) args.get(_cTimeInterval);
+                SetAgentQueueInterval(interval);
                 break;
             }
             case _kWTConfigShowGuideButton: {
@@ -172,6 +179,10 @@ public class WTConfigHandler {
 
     private static void SetInactiveChatTimeoutInterval(long timeoutInSeconds) {
         WTSDKManager.SetInactiveChatTimeoutInterval(timeoutInSeconds);
+    }
+
+    private static void SetAgentQueueInterval(long timeIntervalInSeconds) {
+        WTSDKManager.SetAgentQueueInterval(timeIntervalInSeconds);
     }
 
 }

@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'wannatalkcore'
-  s.version          = '0.0.1'
+  s.version          = '0.0.4'
   s.summary          = 'A new Flutter plugin.'
   s.description      = <<-DESC
 A new Flutter plugin.
@@ -17,7 +17,7 @@ A new Flutter plugin.
 
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'WTExternalSDK', '1.5.1'
+  s.dependency 'WTExternalSDK', '1.6.0'
   s.platform = :ios, '9.0'
 
 

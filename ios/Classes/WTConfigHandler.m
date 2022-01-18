@@ -24,12 +24,14 @@ static const  int _kWTConfigShowExitButton = 9010;
 static const  int _kWTConfigShowChatParticipants = 9011;
 static const  int _kWTConfigEnableChatProfile = 9012;
 static const  int _kWTConfigAllowModifyChatProfile = 9013;
+static const  int _kWTConfigSetAgentQueueInterval = 9014;
 
 #define cShow @"show"
 #define cEnable @"enable"
 #define cAllow @"allow"
 
 #define cTimeoutInterval @"timeoutInterval"
+#define cTimeInterval @"timeInterval"
 
 + (void) handleConfigMethodType:(NSInteger) methodType arguments:(NSDictionary *) args {
 
@@ -41,6 +43,11 @@ static const  int _kWTConfigAllowModifyChatProfile = 9013;
         case _kWTConfigSetInactiveChatTimeout: {
             NSTimeInterval interval = [args[cTimeoutInterval] doubleValue];
             [self SetInactiveChatTimeoutInterval:interval];
+            break;
+        }
+        case _kWTConfigSetAgentQueueInterval: {
+            NSTimeInterval interval = [args[cTimeInterval] doubleValue];
+            [self SetAgentQueueTimeInterval:interval];
             break;
         }
         case _kWTConfigShowGuideButton: {
@@ -184,6 +191,11 @@ static const  int _kWTConfigAllowModifyChatProfile = 9013;
 + (void)SetInactiveChatTimeoutInterval:(double) timeoutInterval   // default = 1800 seconds (30 minutes).
 {
     [WTSDKManager SetInactiveChatTimeoutInterval:timeoutInterval];
+}
+
+// To set timeinterval for checking the available agent // default 20 seconds
++ (void) SetAgentQueueTimeInterval:(double) timeInterval {
+    [WTSDKManager SetAgentQueueTimeInterval:timeInterval];
 }
 
 @end
