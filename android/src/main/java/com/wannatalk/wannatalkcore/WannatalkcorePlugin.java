@@ -33,6 +33,20 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   private static WannatalkcorePlugin plugin;
   private static MethodChannel channel;
   static Activity sActivity;
+
+  public WannatalkcorePlugin() {
+    // All Android plugin classes must support a no-args
+    // constructor. A no-arg constructor is provided by
+    // default without declaring one, but we include it here for
+    // clarity.
+    //
+    // At this point your plugin is instantiated, but it
+    // isn't attached to any Flutter experience. You should not
+    // attempt to do any work here that is related to obtaining
+    // resources or manipulating Flutter.
+  }
+
+
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
 
