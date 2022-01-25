@@ -8,7 +8,7 @@ Edit the `pubspec.yaml` file in your app directory to define the Wannatalk SDK d
 
 ```yaml
 dependencies:
-  wannatalkcore: ^0.0.7
+  wannatalkcore: ^0.0.8
 ```
 
 ## iOS Setup
@@ -55,7 +55,21 @@ dependencies:
    }
    ```
 3. Set colorPrimary, colorPrimaryDark and colorAccent attributes in app's color.xml (src/main/res/values/colors.xml)
-4. That's it! Run the app
+4. Add `maven { url 'https://jitpack.io' }` in your project build.gradle
+   
+   ```
+   allprojects {
+       repositories {
+           ...
+                      
+           maven { url 'https://jitpack.io' }
+           
+           ...
+       }
+       
+   }
+   ```
+5. That's it! Run the app
 
 
 # Usage
