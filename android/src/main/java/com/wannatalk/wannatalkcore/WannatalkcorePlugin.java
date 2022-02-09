@@ -70,14 +70,15 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
   // depending on the user's project. onAttachedToEngine or registerWith must both be defined
   // in the same class.
-  private static void registerWith(Registrar registrar) {
-    if (channel == null || plugin == null) {
-      channel = new MethodChannel(registrar.messenger(), "wannatalkcore");
-      plugin = new WannatalkcorePlugin();
-      channel.setMethodCallHandler(plugin);
-      plugin.initialize();
-    }
-  }
+//  private static void registerWith(Registrar registrar) {
+//    if (channel == null || plugin == null) {
+//      channel = new MethodChannel(registrar.messenger(), "wannatalkcore");
+//      plugin = new WannatalkcorePlugin();
+//      channel.setMethodCallHandler(plugin);
+//      plugin.initialize();
+//    }
+//  }
+
   void initialize() {
     // Context context = getApplicationContext();
 //    final Application applicationContext = (Application) this.reactContext.getApplicationContext();
