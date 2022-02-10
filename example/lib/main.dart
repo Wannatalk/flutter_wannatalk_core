@@ -97,7 +97,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   void presentUsers() {
+
     Wannatalkcore.loadUsers(onCompletion: (WTResult result) {
+       if (result.success) {
+    
+       }
+     });
+  }
+
+  void presentUserChat(String identifier, String message) {
+    Wannatalkcore.loadUserChat(identifier, message, onCompletion: (WTResult result){
       if (result.success) {
 
       }

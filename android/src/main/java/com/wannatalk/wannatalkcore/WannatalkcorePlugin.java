@@ -16,7 +16,10 @@ import wannatalk.wannatalksdk.WTCore.Interface.IWTCompletion;
 import wannatalk.wannatalksdk.WTCore.WTSDKManager;
 import wannatalk.wannatalksdk.WTCore.WTSDKConstants;
 import wannatalk.wannatalksdk.WTLogin.WTLoginManager;
+import wannatalk.wannatalksdk.WTChat.IWTChatLoader;
+import wannatalk.wannatalksdk.WTChat.WTChatLoader;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import android.app.Activity;
@@ -101,7 +104,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  String _cWTAutoOpenChat= "autoOpenChat";
   static final  String _cWTUserIdentifier= "userIdentifier";
   static final  String _cWTUserInfo= "userInfo";
-
+  static final  String _cWTChatMessage= "chatMessage";
 
   static final  int _kWTLoginMethod= 1001;
   static final  int _kWTSilentLoginMethod= 1002;
@@ -112,7 +115,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  int _kWTUpdateUserNameMethod= 1007;
   static final  int _kWTUpdateUserImageMethod= 1008;
   static final  int _kWTIsUserLoggedIn= 1009;
-
+  static final  int _kWTLoadUserChat= 1010;
 
   // OUT
 
@@ -189,6 +192,12 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
       case _kWTUpdateUserImageMethod: {
         String localImagePath = (String) args.get(_cWTLocalImagePath);
         updateUserImage(localImagePath, result);
+        break;
+      }
+      case _kWTLoadUserChat: {
+        String identifier = (String) args.get(_cWTUserIdentifier);
+        String message = (String) args.get(_cWTChatMessage);
+        loadUserChat(identifier, message, result);
         break;
       }
       default: {
@@ -371,6 +380,57 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
           }
         }
       });
+
+    }
+    else {
+      if (result != null) {
+        result.success("Unable to get the context");
+      }
+
+    }
+  }
+
+
+  void loadUserChat(String identifier, String message, final Result result) {
+    // Load users
+
+    final Activity currentActivity = getActivity();
+    if (currentActivity != null && !TextUtils.isEmpty(identifier)) {
+
+
+      WTChatLoader chatLoader = new WTChatLoader(new IWTChatLoader() {
+        @Override
+        public void showSpinner(boolean show) {
+//                showProgressInd(show);
+        }
+
+        @Override
+        public void onCompletion(String error) {
+//          Log.e(TAG, "onCompletion: " + topic + " error:" + error);
+          if (error == null) {
+            if (result != null) {
+              result.success(null);
+            }
+          }
+          else {
+            if (TextUtils.isEmpty(error)) {
+              error = "Something went wrong. Please try again";
+            }
+            if (result != null) {
+              result.success(error);
+            }
+
+          }
+
+        }
+
+        @Override
+        public Activity getParentActivity() {
+          return currentActivity;
+        }
+      });
+
+      chatLoader.loadUserChatPage(identifier, message);
 
     }
     else {

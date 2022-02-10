@@ -36,8 +36,9 @@ android {
 dependencies {
 
 
-    implementation 'ai.wannatalk:wannatalksdk:1.2.2'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'ai.wannatalk:wannatalksdk:1.2.6'
+
+    // implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
 
 //    implementation 'ai.wannatalk:wannatalksdk:1.2.1'

@@ -77,7 +77,7 @@ class Wannatalkcore {
   static const  String _cWTAutoOpenChat= "autoOpenChat";
   static const  String _cWTUserIdentifier= "userIdentifier";
   static const  String _cWTUserInfo= "userInfo";
-
+  static const  String _cWTChatMessage= "chatMessage";
 
   static const  int _kWTLoginMethod= 1001;
   static const  int _kWTSilentLoginMethod= 1002;
@@ -88,7 +88,7 @@ class Wannatalkcore {
   static const  int _kWTUpdateUserNameMethod= 1007;
   static const  int _kWTUpdateUserImageMethod= 1008;
   static const  int _kWTIsUserLoggedIn= 1009;
-
+  static const  int _kWTLoadUserChat= 1010;
 
   /// To check login status
   // static Future<bool> get isUserLoggedIn => _channel.invokeMethod(_cWTIsUserLoggedIn);
@@ -153,7 +153,13 @@ class Wannatalkcore {
     _channel.invokeMethod(_cWTUpdateConfig, <String, dynamic>{_cWTMethodType: kWTMethod, _cWTArgs: object});
   }
 
-
+  /// To update user profile name
+  static Future<void> loadUserChat(String identifier, String message, {required Function(WTResult result) onCompletion}) async {
+    _sendWannatalkMethod(_kWTLoadUserChat, <String, dynamic>{
+      _cWTUserIdentifier: identifier,
+      _cWTChatMessage: message
+    }, onCompletion: onCompletion);
+  }
 }
 
 /// Configurables
