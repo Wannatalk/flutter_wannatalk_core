@@ -1,6 +1,6 @@
 name: wannatalkcore
 description: Wannatalk Official Flutter plugin.
-version: 0.0.9
+version: 0.0.10
 homepage: https://github.com/Wannatalk/flutter_wannatalk_core
 environment:
   sdk: ">=2.12.0 <3.0.0"
