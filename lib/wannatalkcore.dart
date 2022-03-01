@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-
 class WTEventResponse {
 
   static const  String cWTEvent= "wt_event";
   static const  int kWTEventTypeLogin= 2001;
   static const  int kWTEventTypeLogout= 2002;
+  // static const  int kWTEventTypeOrder= 2003;
+  static const  int kWTEventTypeProduct= 2004;
+
 
   late int eventType;
   late WTResult result;
@@ -20,12 +22,50 @@ class WTEventResponse {
 class WTResult {
   late bool success;
   String? error;
+  String? productID;
+  String? storeID;
+  String? sellerOrderID;
+  String? buyerOrderID;
+  String? userIdentifier;
 
   WTResult(this.success, this.error);
 
   WTResult.init() {
     this.success = false;
     this.error = null;
+  }
+
+}
+
+
+class WTChatInput {
+
+  String source = "";
+  String? imagePath;
+  String? caption;
+  String? productID;
+  String? productName;
+  String? productPrice;
+  String? storeID;
+  String? orderBuyerRef;
+  String? orderSellerRef;
+
+  WTChatInput.init(String source) {
+    this.source = source;
+  }
+
+  static WTChatInput Product(String productID, String productName,
+      String productPrice, String imagePath,
+      String caption, String storeID) {
+
+    WTChatInput chatInput = WTChatInput.init("Product");
+    chatInput.productID = productID;
+    chatInput.productName = productName;
+    chatInput.productPrice = productPrice;
+    chatInput.imagePath = imagePath;
+    chatInput.caption = caption;
+    chatInput.storeID = storeID;
+    return chatInput;
   }
 }
 
@@ -36,24 +76,30 @@ class Wannatalkcore {
 
 
   static late Function(WTEventResponse eventResponse) _onReceivedEvent;
-
+  // , {required Function(WTResult result) onCompletion}
   static void setMethodCallHandler({required Function(WTEventResponse eventResponse) onReceivedEvent}) {
     _onReceivedEvent = onReceivedEvent;
     _channel.setMethodCallHandler(_wtEvent);
   }
 
   static Future<void> _wtEvent(MethodCall call) async {
-
     WTEventResponse eventResponse = new WTEventResponse.init();
 
     try {
 
       int eventType = call.arguments["eventType"];
-      bool success = call.arguments["success"];
-      String error = call.arguments["error"];
+      bool success = call.arguments["success"] == 1;
+      String? error = call.arguments["error"];
+
       eventResponse.eventType = eventType;
       eventResponse.result.success = success;
-      eventResponse.result.error= error;
+      eventResponse.result.error = error;
+
+      eventResponse.result.productID = call.arguments[_cProductID];
+      eventResponse.result.storeID = call.arguments[_cStoreID];
+      eventResponse.result.sellerOrderID = call.arguments[_cSellerOrderID];
+      eventResponse.result.buyerOrderID = call.arguments[_cBuyerOrderID];
+      eventResponse.result.userIdentifier = call.arguments[_cWTUserIdentifier];
 
     } on Exception catch (e) {
       print("Failed to login: '${e.toString()}'.");
@@ -74,10 +120,17 @@ class Wannatalkcore {
   static const  String _cWTUsername= "username";
   static const  String _cWTLocalImagePath= "localImagePath";
 
+  static const  String _cProductID= "productID";
+  static const  String _cStoreID= "storeID";
+  static const  String _cSellerOrderID= "sellerOrderID";
+  static const  String _cBuyerOrderID= "buyerOrderID";
+
+
+
   static const  String _cWTAutoOpenChat= "autoOpenChat";
   static const  String _cWTUserIdentifier= "userIdentifier";
   static const  String _cWTUserInfo= "userInfo";
-  static const  String _cWTChatMessage= "chatMessage";
+
 
   static const  int _kWTLoginMethod= 1001;
   static const  int _kWTSilentLoginMethod= 1002;
@@ -89,6 +142,21 @@ class Wannatalkcore {
   static const  int _kWTUpdateUserImageMethod= 1008;
   static const  int _kWTIsUserLoggedIn= 1009;
   static const  int _kWTLoadUserChat= 1010;
+  static const  int _kWTLoadUserChatWithImage= 1011;
+  static const  int _kWTContactOrg= 1012;
+
+
+  static final  String _cISource= "Source";
+  static final  String _cIImage= "Image";
+  static final  String _cICaption= "Caption";
+  static final  String _cIProductID= "ProductID";
+  static final  String _cIProductName= "ProductName";
+  static final  String _cIProductPrice= "ProductPrice";
+  static final  String _cIStoreID= "StoreID";
+
+  static final  String _cIOrgID= "orgID";
+  static final  String _cIChannelID= "channelID";
+  static final  String _cIMessage= "message";
 
   /// To check login status
   // static Future<bool> get isUserLoggedIn => _channel.invokeMethod(_cWTIsUserLoggedIn);
@@ -142,7 +210,7 @@ class Wannatalkcore {
 
   ///
   static Future<WTResult> _sendWannatalkMethod(int kWTMethod, Object? object, {required Function(WTResult result) onCompletion}) async {
-    String error = await _channel.invokeMethod(_cWTDefaultMethod, <String, dynamic>{_cWTMethodType: kWTMethod, _cWTArgs: object});
+    String? error = await _channel.invokeMethod(_cWTDefaultMethod, <String, dynamic>{_cWTMethodType: kWTMethod, _cWTArgs: object});
     WTResult result = new WTResult(error == null, error);
     onCompletion(result);
     return result;
@@ -153,13 +221,37 @@ class Wannatalkcore {
     _channel.invokeMethod(_cWTUpdateConfig, <String, dynamic>{_cWTMethodType: kWTMethod, _cWTArgs: object});
   }
 
-  /// To update user profile name
-  static Future<void> loadUserChat(String identifier, String message, {required Function(WTResult result) onCompletion}) async {
+  /// To send text message to user
+  static Future<void> sendTextMessage(String receiverUserIdentifier, String message, {required Function(WTResult result) onCompletion}) async {
     _sendWannatalkMethod(_kWTLoadUserChat, <String, dynamic>{
-      _cWTUserIdentifier: identifier,
-      _cWTChatMessage: message
+      _cWTUserIdentifier: receiverUserIdentifier,
+      _cIMessage: message
     }, onCompletion: onCompletion);
   }
+
+  /// To send image message to user
+  static Future<void> sendProductImage(String receiverUserIdentifier, WTChatInput chatInput, {required Function(WTResult result) onCompletion}) async {
+    _sendWannatalkMethod(_kWTLoadUserChatWithImage, <String, dynamic>{
+      _cWTUserIdentifier: receiverUserIdentifier,
+      _cISource: chatInput.source,
+      _cICaption: chatInput.caption,
+      _cIImage: chatInput.imagePath,
+      _cIProductID: chatInput.productID,
+      _cIProductName: chatInput.productName,
+      _cIProductPrice: chatInput.productPrice,
+      _cIStoreID: chatInput.storeID
+    }, onCompletion: onCompletion);
+  }
+
+  /// To contact organization
+  static Future<void> contactOrganization(String orgID, String channelID, String message, {required Function(WTResult result) onCompletion}) async {
+    _sendWannatalkMethod(_kWTContactOrg, <String, dynamic>{
+      _cIOrgID: orgID,
+      _cIChannelID: channelID,
+      _cIMessage: message
+    }, onCompletion: onCompletion);
+  }
+
 }
 
 /// Configurables

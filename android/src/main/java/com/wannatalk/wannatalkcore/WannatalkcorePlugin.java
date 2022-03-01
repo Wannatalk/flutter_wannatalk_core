@@ -18,6 +18,8 @@ import wannatalk.wannatalksdk.WTCore.WTSDKConstants;
 import wannatalk.wannatalksdk.WTLogin.WTLoginManager;
 import wannatalk.wannatalksdk.WTChat.IWTChatLoader;
 import wannatalk.wannatalksdk.WTChat.WTChatLoader;
+import wannatalk.wannatalksdk.WTCore.Interface.IWTSDKCallbacks;
+import wannatalk.wannatalksdk.WTChat.ChatInputData;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -88,6 +90,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
 
 
     WTLoginManager.setIwtLoginManager(iwtLoginManager);
+    WTSDKManager.SetIwtsdkCallbacks(iwtsdkCallbacks);
   }
 
   // IN
@@ -104,7 +107,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  String _cWTAutoOpenChat= "autoOpenChat";
   static final  String _cWTUserIdentifier= "userIdentifier";
   static final  String _cWTUserInfo= "userInfo";
-  static final  String _cWTChatMessage= "chatMessage";
+//  static final  String _cWTChatMessage= "chatMessage";
 
   static final  int _kWTLoginMethod= 1001;
   static final  int _kWTSilentLoginMethod= 1002;
@@ -116,6 +119,8 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  int _kWTUpdateUserImageMethod= 1008;
   static final  int _kWTIsUserLoggedIn= 1009;
   static final  int _kWTLoadUserChat= 1010;
+  static final  int _kWTLoadUserChatWithImage= 1011;
+  static final  int _kWTContactOrg= 1012;
 
   // OUT
 
@@ -124,9 +129,30 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  String _cSuccess= "success";
   static final  String _cError= "error";
 
+  static final  String _cProductID= "productID";
+  static final  String _cStoreID= "storeID";
+  static final  String _cSellerOrderID= "sellerOrderID";
+  static final  String _cBuyerOrderID= "buyerOrderID";
+
+
+  static final  String _cISource= "Source";
+  static final  String _cIImage= "Image";
+  static final  String _cICaption= "Caption";
+  static final  String _cIProductID= "ProductID";
+  static final  String _cIProductName= "ProductName";
+  static final  String _cIProductPrice= "ProductPrice";
+  static final  String _cIStoreID= "StoreID";
+
+  static final  String _cIOrgID= "orgID";
+  static final  String _cIChannelID= "channelID";
+  static final  String _cIMessage= "message";
+
+
   static final  int kWTEventTypeLogin= 2001;
   static final  int kWTEventTypeLogout= 2002;
-
+  static final  int kWTEventTypeOrder= 2003;
+  static final  int kWTEventTypeProduct= 2004;
+  static final  int kWTEventTypeStore= 2005;
 
 //  Activity activity;
 
@@ -196,10 +222,19 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
       }
       case _kWTLoadUserChat: {
         String identifier = (String) args.get(_cWTUserIdentifier);
-        String message = (String) args.get(_cWTChatMessage);
+        String message = (String) args.get(_cIMessage);
         loadUserChat(identifier, message, result);
         break;
       }
+      case _kWTLoadUserChatWithImage: {
+        loadUserChatWithImage(args, result);
+        break;
+      }
+      case _kWTContactOrg: {
+        contactOrganization(args, result);
+        break;
+      }
+
       default: {
         result.notImplemented();
         break;
@@ -441,6 +476,89 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     }
   }
 
+  void contactOrganization(Map<String, Object> args, final Result result) {
+
+    String message = (String) args.get(_cIMessage);
+    String sOrgID = (String) args.get(_cIOrgID);
+    String sChannelID = (String) args.get(_cIChannelID);
+
+    Integer orgID = Integer.valueOf(sOrgID);
+    Integer channelID = Integer.valueOf(sChannelID);
+
+    final Activity currentActivity = getActivity();
+    if (currentActivity == null) {
+      if (result != null) {
+        result.success("Unable to get the context");
+      }
+      return;
+    }
+
+    WTChatLoader.sendMessage(message, orgID, channelID);
+
+    if (result != null) {
+      result.success(null);
+    }
+
+  }
+
+  void loadUserChatWithImage(Map<String, Object> args, final Result result) {
+
+
+    final Activity currentActivity = getActivity();
+    if (currentActivity == null) {
+      if (result != null) {
+        result.success("Unable to get the context");
+      }
+      return;
+    }
+
+
+
+    WTChatLoader chatLoader = new WTChatLoader(new IWTChatLoader() {
+      @Override
+      public void showSpinner(boolean show) {
+//                showProgressInd(show);
+      }
+
+      @Override
+      public void onCompletion(String error) {
+//        Log.e(TAG, "onCompletion error:" + error);
+        if (error == null) {
+          if (result != null) {
+            result.success(null);
+          }
+        }
+        else {
+          if (TextUtils.isEmpty(error)) {
+            error = "Something went wrong. Please try again";
+          }
+          if (result != null) {
+            result.success(error);
+          }
+
+        }
+      }
+
+      @Override
+      public Activity getParentActivity() {
+        return currentActivity;
+      }
+    });
+
+    String wtUserIdentifier = (String) args.get(_cWTUserIdentifier);
+    ChatInputData chatInputData = new ChatInputData();
+
+    chatInputData.source = (String) args.get(_cISource);
+    chatInputData.imagePath = (String) args.get(_cIImage);
+    chatInputData.caption = (String) args.get(_cICaption);
+    chatInputData.productID = (String) args.get(_cIProductID);
+    chatInputData.productName = (String) args.get(_cIProductName);
+    chatInputData.productPrice = (String) args.get(_cIProductPrice);
+    chatInputData.storeID = (String) args.get(_cIStoreID);;
+
+    chatLoader.loadUserChatWithChatInputData(chatInputData, wtUserIdentifier);
+  }
+
 //  //
 //  // private static void sendNotification(RemoteMessage remoteMessage, Context
 //  // context) {
@@ -506,6 +624,54 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     logoutResult = null;
   }
 
+  private void sendP2POrderEvent(String userIdentifier, String storeID, String buyerOrderID, String sellerOrderID) {
+
+    Map<String, Object> args = new HashMap<>();
+    args.put(_cEventType, kWTEventTypeOrder);
+    args.put(_cSuccess,true);
+    args.put(_cError, null);
+    args.put(_cStoreID, storeID);
+    args.put(_cSellerOrderID, sellerOrderID);
+    args.put(_cProductID, null);
+    args.put(_cBuyerOrderID, buyerOrderID);
+    args.put(_cWTUserIdentifier, userIdentifier);
+
+
+
+    channel.invokeMethod(_cMethod, args);
+  }
+
+  private void sendP2PProductEvent(String userIdentifier, String storeID, String productID) {
+
+    Map<String, Object> args = new HashMap<>();
+    args.put(_cEventType, kWTEventTypeProduct);
+    args.put(_cSuccess,true);
+    args.put(_cError, null);
+    args.put(_cStoreID, storeID);
+    args.put(_cSellerOrderID, null);
+    args.put(_cProductID, productID);
+    args.put(_cBuyerOrderID, null);
+    args.put(_cWTUserIdentifier, userIdentifier);
+
+    channel.invokeMethod(_cMethod, args);
+  }
+
+  private void sendP2PStoreEvent(String userIdentifier, String storeID) {
+
+    Map<String, Object> args = new HashMap<>();
+    args.put(_cEventType, kWTEventTypeStore);
+    args.put(_cSuccess,true);
+    args.put(_cError, null);
+    args.put(_cStoreID, storeID);
+    args.put(_cSellerOrderID, null);
+    args.put(_cProductID, null);
+    args.put(_cBuyerOrderID, null);
+    args.put(_cWTUserIdentifier, userIdentifier);
+
+    channel.invokeMethod(_cMethod, args);
+  }
+
+
   private void sendWannatalkEvent(int eventType, String error) {
 
     Map<String, Object> args = new HashMap<>();
@@ -517,6 +683,29 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     channel.invokeMethod(_cMethod, args);
   }
 
+
+//  WTChatLoader chatLoader = new WTChatLoader(new IWTChatLoader() {
+//    @Override
+//    public void showSpinner(boolean show) {
+////                showProgressInd(show);
+//    }
+//
+//    @Override
+//    public void onCompletion(String error) {
+////        Log.e(TAG, "onCompletion error:" + error);
+//      if (error != null) {
+//        String error_message = "Something went wrong. Please try again";
+////          WTUIManager.ShowToastMessage(error_message);
+//      }
+//    }
+//
+//    @Override
+//    public Activity getParentActivity() {
+//      return activity;
+//    }
+//  });
+//
+//    chatLoader.loadUserChatPage(wtUserIdentifier, caption);
 
   IWTLoginManager iwtLoginManager = new IWTLoginManager() {
 
@@ -545,4 +734,37 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     }
 
   };
+
+
+  IWTSDKCallbacks iwtsdkCallbacks = new IWTSDKCallbacks() {
+    @Override
+    public void topicBadgeCount(int badgeCount) {
+
+    }
+
+    @Override
+    public void mochaBadgeCount(int badgeCount) {
+
+    }
+
+    @Override
+    public void loadOrderPage(String userIdentifier, String storeID, String buyerID, String sellerID) {
+
+      sendP2POrderEvent(userIdentifier, storeID, buyerID, sellerID);
+//      WTUIManager.ShowToastMessage("loadOrderPage");
+    }
+
+    @Override
+    public void loadProductPage(String userIdentifier, String storeID, String productID) {
+      sendP2PProductEvent(userIdentifier, storeID, productID);
+//      WTUIManager.ShowToastMessage("loadProductPage");
+    }
+
+    @Override
+    public void loadStorePage(String userIdentifier, String storeID) {
+//      WTUIManager.ShowToastMessage("loadStorePage");
+      sendP2PStoreEvent(userIdentifier, storeID);
+    }
+  };
+
 }

@@ -3,10 +3,10 @@
 #import "WTConfigHandler.h"
 
 
-@interface WannatalkcorePlugin() <WTLoginManagerDelegate, WTSDKManagerDelegate> {
+@interface WannatalkcorePlugin() <WTLoginManagerDelegate, WTSDKManagerDelegate, WTChatLoaderDelegate> {
     BOOL _hasListeners;
 
-
+    WTChatLoaderX *chatLoader;
 
 }
 @property (nonatomic, strong) FlutterResult loginResult;
@@ -14,7 +14,8 @@
 @property (nonatomic, strong) FlutterResult orgProfileResult;
 @property (nonatomic, strong) FlutterResult chatListResult;
 @property (nonatomic, strong) FlutterResult userListResult;
-
+@property (nonatomic, strong) FlutterResult userChatResult;
+//@property (nonatomic, strong) FlutterResult orgChatResult;
 
 @property (nonatomic, strong) FlutterMethodChannel *wtEventChannel;
 
@@ -37,6 +38,8 @@
 
     [WTLoginManager sharedInstance].delegate = self;
     [WTSDKManager sharedInstance].delegate = self;
+    chatLoader = [[WTChatLoaderX alloc] initWithDelegate:self];
+    
 }
 
 
@@ -66,17 +69,41 @@ static const  int _kWTUserListMethod= 1006;
 static const  int _kWTUpdateUserNameMethod= 1007;
 static const  int _kWTUpdateUserImageMethod= 1008;
 static const  int _kWTIsUserLoggedIn= 1009;
+static const  int _kWTLoadUserChat= 1010;
+static const  int _kWTLoadUserChatWithImage= 1011;
+static const  int _kWTContactOrg= 1012;
 
 
 // OUT
 
-static const  NSString * _Nonnull _cMethod= @"wt_event";
-static const  NSString * _Nonnull _cEventType= @"eventType";
-static const  NSString * _Nonnull _cSuccess= @"success";
-static const  NSString * _Nonnull _cError= @"error";
+static const  NSString * _Nonnull _cMethod = @"wt_event";
+static const  NSString * _Nonnull _cEventType = @"eventType";
+static const  NSString * _Nonnull _cSuccess = @"success";
+static const  NSString * _Nonnull _cError = @"error";
 
-static const  int _kWTEventTypeLogin= 2001;
-static const  int _kWTEventTypeLogout= 2002;
+static const  NSString * _Nonnull _cProductID= @"productID";
+static const  NSString * _Nonnull _cStoreID= @"storeID";
+static const  NSString * _Nonnull _cSellerOrderID= @"sellerOrderID";
+static const  NSString * _Nonnull _cBuyerOrderID= @"buyerOrderID";
+
+
+static const  NSString * _Nonnull _cISource= @"Source";
+static const  NSString * _Nonnull _cIImage= @"Image";
+static const  NSString * _Nonnull _cICaption= @"Caption";
+static const  NSString * _Nonnull _cIProductID= @"ProductID";
+static const  NSString * _Nonnull _cIProductName= @"ProductName";
+static const  NSString * _Nonnull _cIProductPrice= @"ProductPrice";
+static const  NSString * _Nonnull _cIStoreID= @"StoreID";
+
+static const  NSString * _Nonnull _cIOrgID= @"orgID";
+static const  NSString * _Nonnull _cIChannelID= @"channelID";
+static const  NSString * _Nonnull _cIMessage= @"message";
+
+static const  int _kWTEventTypeLogin = 2001;
+static const  int _kWTEventTypeLogout = 2002;
+static const  int _kWTEventTypeOrder = 2003;
+static const  int _kWTEventTypeProduct = 2004;
+static const  int _kWTEventTypeStore = 2005;
 
 
 #pragma mark -
@@ -106,6 +133,18 @@ static const  int _kWTEventTypeLogout= 2002;
         }
         case _kWTChatListMethod: {
             [self loadChatList:result];
+            break;
+        }
+        case _kWTContactOrg: {
+            [self contactOrg:result arguments:args];
+            break;
+        }
+        case _kWTLoadUserChat: {
+            [self loadUserChat:result arguments:args];
+            break;
+        }
+        case _kWTLoadUserChatWithImage: {
+            [self loadUserChatWithImage:result arguments:args];
             break;
         }
         case _kWTUserListMethod: {
@@ -159,9 +198,25 @@ static const  int _kWTEventTypeLogout= 2002;
 + (UIViewController *) GetWindowRootViewController {
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UIViewController *_rootViewController = (UIViewController *)window.rootViewController;
+    
+    if (_rootViewController.presentedViewController != nil) {
+        UINavigationController *nav1 = (UINavigationController *)_rootViewController.presentedViewController;
+        if ([nav1 isKindOfClass:[UINavigationController class]]) {
+            return nav1.visibleViewController;
+        }
+    }
     return _rootViewController;
 }
 
+//+ (UIViewController *) getNavVisibleViewController:(UINavigationController *) nvc {
+//    UINavigationController *nav1 = (UINavigationController *)_rootViewController.presentedViewController;
+//    if ([nav1 isKindOfClass:[UINavigationController class]]) {
+//
+//
+//        return nav1.visibleViewController;
+//    }
+//
+//}
 + (void) RunMainThread:(void (^)(void))onMainThread {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -240,6 +295,45 @@ static const  int _kWTEventTypeLogout= 2002;
 }
 
 
+- (void) loadUserChat:(FlutterResult) result arguments:(NSDictionary *) args {
+    self.userChatResult = result;
+    
+    NSString *identifier = args[_cWTUserIdentifier];
+    NSString *message = args[_cIMessage];
+    [chatLoader loadUserChatPageWithIdentifier:identifier message:message];
+}
+
+- (void) contactOrg:(FlutterResult) result arguments:(NSDictionary *) args {
+    self.userChatResult = result;
+    
+    NSInteger orgID = [args[_cIOrgID] integerValue];
+    NSInteger channelID = [args[_cIChannelID] integerValue];
+    NSString *message = args[_cIMessage];
+    
+    [chatLoader sendMessage:message orgID:orgID channelID:channelID onCompletion:^(BOOL success, NSString *errorMessage) {
+    
+        [self sendUserChatCallback:errorMessage];
+    }];
+}
+
+- (void) loadUserChatWithImage:(FlutterResult) result arguments:(NSDictionary *) args {
+    self.userChatResult = result;
+    
+    NSString *identifier = args[_cWTUserIdentifier];
+    ChatInputData *chatInputData = [ChatInputData new];
+    
+    chatInputData.source = args[_cISource];
+    chatInputData.imagePath = args[_cIImage];
+    chatInputData.caption = args[_cICaption];
+    chatInputData.productID = args[_cIProductID];
+    chatInputData.productName = args[_cIProductName];
+    chatInputData.productPrice = args[_cIProductPrice];
+    chatInputData.storeID = args[_cIStoreID];
+    
+    [chatLoader loadUserChatPageWithIdentifier:identifier chatInputData:chatInputData];
+
+}
+
 - (void)loadUsers:(FlutterResult) result {
     self.userListResult = result;
 
@@ -272,6 +366,65 @@ static const  int _kWTEventTypeLogout= 2002;
 
 #pragma mark -
 
+
+- (void) sendP2POrderEvent:(NSString *) userIdentifier storeID:(NSString *) storeID buyerID:(NSString *) buyerID sellerID:(NSString *) sellerID error:(NSString *) error {
+    if (_hasListeners) {
+        
+        
+        NSMutableDictionary *args = [NSMutableDictionary new];
+        args[_cEventType] = @(_kWTEventTypeOrder);
+        args[_cSuccess] = @(error == nil);
+        args[_cError] = error;
+
+        args[_cStoreID] = storeID;
+        args[_cSellerOrderID] = sellerID;
+        args[_cProductID] = nil;
+        args[_cBuyerOrderID] = buyerID;
+        args[_cWTUserIdentifier] = userIdentifier;
+        
+        [self.wtEventChannel invokeMethod:_cMethod arguments:args];
+    }
+}
+
+- (void) sendP2PProductEvent:(NSString *) userIdentifier storeID:(NSString *) storeID productID:(NSString *) productID error:(NSString *) error {
+    if (_hasListeners) {
+        
+        
+        NSMutableDictionary *args = [NSMutableDictionary new];
+        args[_cEventType] = @(_kWTEventTypeProduct);
+        args[_cSuccess] = @(error == nil);
+        args[_cError] = error;
+
+        args[_cStoreID] = storeID;
+        args[_cSellerOrderID] = nil;
+        args[_cProductID] = productID;
+        args[_cBuyerOrderID] = nil;
+        
+        args[_cWTUserIdentifier] = userIdentifier;
+        
+        [self.wtEventChannel invokeMethod:_cMethod arguments:args];
+    }
+}
+
+- (void) sendP2PStoreEvent:(NSString *) userIdentifier storeID:(NSString *) storeID error:(NSString *) error {
+    if (_hasListeners) {
+        
+        
+        NSMutableDictionary *args = [NSMutableDictionary new];
+        args[_cEventType] = @(_kWTEventTypeStore);
+        args[_cSuccess] = @(error == nil);
+        args[_cError] = error;
+
+        args[_cStoreID] = storeID;
+        args[_cSellerOrderID] = nil;
+        args[_cProductID] = nil;
+        args[_cBuyerOrderID] = nil;
+        
+        args[_cWTUserIdentifier] = userIdentifier;
+        
+        [self.wtEventChannel invokeMethod:_cMethod arguments:args];
+    }
+}
 
 - (void) sendWannatalkEvent:(NSInteger ) eventType error:(NSString *) error {
     if (_hasListeners) {
@@ -322,6 +475,32 @@ static const  int _kWTEventTypeLogout= 2002;
     self.userListResult = nil;
 }
 
+- (void) sendUserChatCallback:(NSString *) error {
+    if (self.userChatResult) {
+        self.userChatResult(error);
+    }
+    self.userChatResult = nil;
+}
+
+#pragma mark - WTChatLoader Delegate Methods
+
+- (void) WTChatLoaderDelegateDidShowSpinner:(BOOL) show {
+    
+}
+
+- (void) WTChatLoaderDelegateDidLoadTopic:(nullable NSString *) error {
+ 
+    if (self.userChatResult) {
+        [self sendUserChatCallback:error];
+    }
+    
+}
+
+- (UIViewController *) getParentVC {
+    
+    UIViewController *_rootViewController = [WannatalkcorePlugin GetWindowRootViewController];
+    return _rootViewController;
+}
 
 #pragma mark - WTLoginManager Delegate Methods
 
@@ -386,4 +565,24 @@ static const  int _kWTEventTypeLogout= 2002;
 - (void) wtsdkUsersDidLoadFailWithError:(NSString *) error {
     [self sendUserListallback:error];
 }
+
+//public void loadOrderPage(String userIdentifier, String storeID, String buyerRefOrderID, String sellerRefOrderID);
+//    public void loadProductPage(String userIdentifier, String productID);
+//    public void loadStorePage(String userIdentifier, String storeID);
+
+- (void) wtsdkLoadProductPage:(NSString *) userIdentifier storeID:(NSString *) storeID productID:(NSString *) productID {
+    [self sendP2PProductEvent:userIdentifier storeID:storeID productID: productID error: nil];
+}
+
+- (void) wtsdkLoadOrderPage:(NSString *) userIdentifier storeID:(NSString *) storeID buyerRefOrderID:(NSString *) buyerRefOrderID sellerRefOrderID:(NSString *) sellerRefOrderID {
+
+    
+    [self sendP2POrderEvent:userIdentifier storeID:storeID buyerID:buyerRefOrderID sellerID:sellerRefOrderID error:nil];
+    
+}
+
+- (void) wtsdkLoadStorePage:(NSString *) userIdentifier storeID:(NSString *) storeID {
+    [self sendP2PStoreEvent: userIdentifier storeID: storeID error: nil];
+}
+
 @end
