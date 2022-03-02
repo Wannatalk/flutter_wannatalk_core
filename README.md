@@ -108,11 +108,94 @@ Wannatalkcore.logout(onCompletion: (WTResult result) {
 ```
 
 ### Wannatalk events
+
+This callback will be triggered to notify events:
+1. kWTEventTypeLogin: This event will be triggered when user login into wannatalk account. `evenResponse.success` indicates whether login successful or not. If fails, check error information at `eventResponse.error`.
+2. kWTEventTypeLogout: This event will be triggered when user loggout from wannatalk account. `evenResponse.success` indicates whether logout successful or not. If fails, check error information at `eventResponse.error`.
+3. kWTEventTypeProduct: This event will be triggered when user click on product image in chat page. `evenResponse.result` contains productID and storeID of the respective product image message.
+
 ```dart
+    
 Wannatalkcore.setMethodCallHandler(onReceivedEvent:(WTEventResponse eventResponse) {
 
+    switch (eventResponse.eventType) {
+        case WTEventResponse.kWTEventTypeProduct: {
+            var result = eventResponse.result;
+            if (result.success) {
+                if (result.productID != null && result.storeID != null) {
+                    print("ProductID: " + result.productID!);
+                    print("StoreID: " + result.storeID!);
+                }
+            }
+            else {
+                // Error
+                print(result.error);
+            }
+            break;
+        }
+    }
 });
 ```
+
+
+## To send text message to user
+```dart
+
+    String receiverUserIdentifier = "+60199299399499";  // Receiver mobile number with calling code
+    
+    String message = "Hi"; // Message you want to send to user
+    Wannatalkcore.sendTextMessage(receiverUserIdentifier, message, onCompletion: (WTResult result) {
+      if (result.success) {
+
+      }
+    });
+
+```
+
+
+
+## To send product image to user
+```dart
+
+    String receiverUserIdentifier = "+60199299399499"; // Receiver mobile number with calling code
+
+    String productID = "<productID>"; // Product identifier 
+    String productName = "<productName>"; // Optional // Product name
+    String productPrice = "<productPrice>"; // Optional // Product price
+    String productImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png"; // Product image url
+    String caption = "Can share details about this product?"; // caption will be sent to receiver along with image
+    String storeID = "<storeID>"; // Store/Shop identifier 
+
+    WTChatInput chatInput = WTChatInput.Product(productID, productName,
+            productPrice, productImageUrl,
+            caption, storeID);
+        
+    Wannatalkcore.sendProductImage(receiverUserIdentifier, chatInput, onCompletion: (WTResult result) {
+      if (result.success) {
+
+      }
+    });
+    
+
+```
+
+
+## To contact organization support
+```dart
+
+    String orgID = "your_organization_id";
+    String channelID = "your_chat_channel_id";
+    String message = "Hi";
+
+    Wannatalkcore.contactOrganization(orgID, channelID, message, onCompletion: (WTResult result) {
+      if (result.success) {
+
+      }
+    });
+
+```
+
+
 
     
 ## HelpDesk
