@@ -1,6 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+
+
+class WTFontNames {
+
+  String? regular;
+  String? bold;
+  String? light;
+  String? medium;
+  String? italic;
+
+  WTFontNames.init() {
+
+  }
+}
+
 class WTEventResponse {
 
   static const  String cWTEvent= "wt_event";
@@ -8,6 +23,7 @@ class WTEventResponse {
   static const  int kWTEventTypeLogout= 2002;
   // static const  int kWTEventTypeOrder= 2003;
   static const  int kWTEventTypeProduct= 2004;
+  static const  int kWTEventTypeLoadStorePage= 2005;
 
 
   late int eventType;
@@ -272,9 +288,17 @@ class WannatalkConfig {
   static const  int _kWTConfigAllowModifyChatProfile = 9013;
   static const  int _kWTConfigSetAgentQueueInterval = 9014;
 
+  static const  int _kWTConfigShowHomeButton= 9015;
+  static const  int _kWTConfigSetChatHeaderColor= 9016;
+  static const  int _kWTConfigSetChatTitleColor= 9017;
+  static const  int _kWTConfigSetChatBGColor= 9018;
+  static const  int _kWTConfigSetFontNames= 9019;
+
+
   static const  String _cEnable= "enable";
   static const  String _cShow= "show";
   static const  String _cAllow= "allow";
+  static const  String _cValue= "value";
   static const  String _cTimeoutInterval = "timeoutInterval";
   static const  String _cTimeInterval = "timeInterval";
 
@@ -351,6 +375,29 @@ class WannatalkConfig {
   /// To allow modify in chat profile page
   static Future<void> allowModifyChatProfile(bool allow) async {
     Wannatalkcore._updateConfig(_kWTConfigAllowModifyChatProfile, <String, dynamic>{_cAllow: allow});
+  }
+
+
+  static Future<void> showHomeButton(bool value) async {
+    Wannatalkcore._updateConfig(_kWTConfigShowHomeButton, <String, dynamic>{_cValue: value});
+  }
+  static Future<void> setChatHeaderColor(String value) async {
+    Wannatalkcore._updateConfig(_kWTConfigSetChatHeaderColor, <String, dynamic>{_cValue: value});
+  }
+  static Future<void> setChatTitleColor(String value) async {
+    Wannatalkcore._updateConfig(_kWTConfigSetChatTitleColor, <String, dynamic>{_cValue: value});
+  }
+  static Future<void> setChatBGColor(String value) async {
+    Wannatalkcore._updateConfig(_kWTConfigSetChatBGColor, <String, dynamic>{_cAllow: value});
+  }
+  static Future<void> setFontNames(WTFontNames fontNames) async {
+    Wannatalkcore._updateConfig(_kWTConfigSetFontNames, <String, dynamic?>{
+      "regular": fontNames.regular,
+      "bold": fontNames.bold,
+      "italic": fontNames.italic,
+      "medium": fontNames.medium,
+      "italic": fontNames.italic,
+    });
   }
 
 }

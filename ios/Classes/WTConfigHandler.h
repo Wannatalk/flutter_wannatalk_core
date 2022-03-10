@@ -54,6 +54,14 @@ NS_ASSUME_NONNULL_BEGIN
 //Chat session will end if user is inactive for timeout interval duration. If timeout interval is 0, chat session will not end automatically. The default timout interval is 1800 seconds (30 minutes).
 + (void)SetInactiveChatTimeoutInterval:(double) timeoutInterval;   // default = 1800 seconds (30 minutes).
 
+
+
++ (void) ShowHomeButton:(BOOL) value;
++ (void) SetChatHeaderColor:(NSString *) value;
++ (void) SetChatTitleColor:(NSString *) value;
++ (void) SetChatBGColor:(NSString *) value;
++ (void) SetFontNames:(NSDictionary *) value;
+
 @end
 
 NS_ASSUME_NONNULL_END

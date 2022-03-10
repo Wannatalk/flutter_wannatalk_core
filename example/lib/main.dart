@@ -6,6 +6,7 @@ import 'package:wannatalkcore/wannatalkcore.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 void main() => runApp(MyApp());
 
@@ -43,6 +44,21 @@ class _MyAppState extends State<MyApp> {
 
           break;
         }
+        case WTEventResponse.kWTEventTypeLoadStorePage: {
+          var result = eventResponse.result;
+
+          if (result.success) {
+            if (result.userIdentifier != null) {
+              print("User PhoneNumber: " + result.userIdentifier!);
+            }
+          }
+          else {
+            // Error
+            print(result.error);
+          }
+          break;
+        }
+
       }
 
     });
@@ -60,8 +76,41 @@ class _MyAppState extends State<MyApp> {
     WannatalkConfig.allowAddParticipants(false);
     WannatalkConfig.enableAutoTickets(true);
 
-    WannatalkConfig.showExitButton(true);
+    WannatalkConfig.showExitButton(false);
+    WannatalkConfig.showHomeButton(true);
     WannatalkConfig.enableChatProfile(false);
+    WannatalkConfig.setChatHeaderColor("#1475a5");
+    WannatalkConfig.setChatTitleColor("#FFFFFF");
+    WannatalkConfig.setChatBGColor("#FFFFFF");
+
+
+
+    if (Platform.isAndroid) {
+      // Android-specific code
+      var fontNames = WTFontNames.init();
+      fontNames.regular = "montserrat_regular.ttf";
+      fontNames.bold = "montserrat_bold.ttf";
+      fontNames.medium = "montserrat_medium.ttf";
+      fontNames.italic = "montserrat_light.ttf";
+      fontNames.light = "montserrat_light.ttf";
+
+      WannatalkConfig.setFontNames(fontNames);
+
+
+
+    } else if (Platform.isIOS) {
+      // iOS-specific code
+      var fontNames = WTFontNames.init();
+      fontNames.regular = "Montserrat-Regular";
+      fontNames.bold = "Montserrat-Bold";
+      fontNames.medium = "Montserrat-Medium";
+      fontNames.italic = "Montserrat-Light";
+      fontNames.light = "Montserrat-Light";
+
+      WannatalkConfig.setFontNames(fontNames);
+
+
+    }
 
     setState(() {
       _userLoggedIn = loggedIn;
@@ -175,32 +224,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  showAlertDialog(BuildContext context, String message) {
-
-    // set up the button
-    Widget okButton = TextButton(
-      child: Text("OK"),
-      onPressed: () { },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Alert"),
-      content: Text(message),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -260,47 +283,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-}
-
-class FirstRoute extends StatelessWidget {
-  const FirstRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Open route'),
-          onPressed: () {
-            // Navigate to second route when tapped.
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
-    );
-  }
 }

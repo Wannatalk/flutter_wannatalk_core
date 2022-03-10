@@ -51,6 +51,13 @@
 	<string>The app requires access to contacts to locate friends already on the Wannatalk network</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The app requires access to photo libary to save in-chat photos and videos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>montserrat_bold.ttf</string>
+		<string>montserrat_regular.ttf</string>
+		<string>montserrat_light.ttf</string>
+		<string>montserrat_medium.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -26,9 +26,16 @@ static const  int _kWTConfigEnableChatProfile = 9012;
 static const  int _kWTConfigAllowModifyChatProfile = 9013;
 static const  int _kWTConfigSetAgentQueueInterval = 9014;
 
+static const  int _kWTConfigShowHomeButton= 9015;
+static const  int _kWTConfigSetChatHeaderColor= 9016;
+static const  int _kWTConfigSetChatTitleColor= 9017;
+static const  int _kWTConfigSetChatBGColor= 9018;
+static const  int _kWTConfigSetFontNames= 9019;
+
 #define cShow @"show"
 #define cEnable @"enable"
 #define cAllow @"allow"
+#define cValue @"value"
 
 #define cTimeoutInterval @"timeoutInterval"
 #define cTimeInterval @"timeInterval"
@@ -105,6 +112,44 @@ static const  int _kWTConfigSetAgentQueueInterval = 9014;
             [self AllowModifyChatProfile:allow];
             break;
         }
+        case _kWTConfigShowHomeButton: {
+            BOOL value = [args[cValue] boolValue];
+            [self ShowHomeButton:value];
+            break;
+        }
+        case _kWTConfigSetChatBGColor: {
+            NSString *value = args[cValue];
+            [self SetChatBGColor:value];
+            break;
+        }
+        case _kWTConfigSetChatHeaderColor: {
+            NSString *value = args[cValue];
+            [self SetChatHeaderColor:value];
+            break;
+        }
+        case _kWTConfigSetChatTitleColor: {
+            NSString *value = args[cValue];
+            [self SetChatTitleColor:value];
+            break;
+        }
+        case _kWTConfigSetFontNames: {
+            NSString *regular = args[@"regular"];
+            NSString *bold = args[@"bold"];
+            NSString *italic = args[@"italic"];
+            NSString *medium = args[@"medium"];
+            NSString *light = args[@"light"];
+            
+            NSMutableDictionary *dctFonts = [NSMutableDictionary new];
+            dctFonts[@"regular"] = regular;
+            dctFonts[@"bold"] = bold;
+            dctFonts[@"italic"] = italic;
+            dctFonts[@"medium"] = medium;
+            dctFonts[@"light"] = light;
+            
+            [self SetFontNames:dctFonts];
+            break;
+        }
+
         default: {
 
             break;
@@ -196,6 +241,26 @@ static const  int _kWTConfigSetAgentQueueInterval = 9014;
 // To set timeinterval for checking the available agent // default 20 seconds
 + (void) SetAgentQueueTimeInterval:(double) timeInterval {
     [WTSDKManager SetAgentQueueTimeInterval:timeInterval];
+}
+
++ (void) ShowHomeButton:(BOOL) value {
+    [WTSDKManager ShowHomeButton:value];
+}
+
++ (void) SetChatHeaderColor:(NSString *) value {
+    [WTSDKManager SetChatHeaderColor: value];
+}
+
++ (void) SetChatTitleColor:(NSString *) value {
+    [WTSDKManager SetChatTitleColor: value];
+}
+
++ (void) SetChatBGColor:(NSString *) value {
+    [WTSDKManager SetChatBGColor: value];
+}
+
++ (void) SetFontNames:(NSDictionary *) value {
+    [WTSDKManager SetFontNames: value];
 }
 
 @end

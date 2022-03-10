@@ -3,6 +3,7 @@ package com.wannatalk.wannatalkcore;
 
 import androidx.annotation.NonNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.flutter.plugin.common.MethodChannel;
@@ -24,10 +25,16 @@ public class WTConfigHandler {
     static final int _kWTConfigAllowModifyChatProfile = 9013;
     static final int _kWTConfigSetAgentQueueInterval = 9014;
 
+    static final  int _kWTConfigShowHomeButton= 9015;
+    static final  int _kWTConfigSetChatHeaderColor= 9016;
+    static final  int _kWTConfigSetChatTitleColor= 9017;
+    static final  int _kWTConfigSetChatBGColor= 9018;
+    static final  int _kWTConfigSetFontNames= 9019;
+
     static final String _cShow = "show";
     static final String _cEnable = "enable";
     static final String _cAllow = "allow";
-
+    static final String _cValue = "value";
     static final String _cTimeoutInterval = "timeoutInterval";
     static final  String _cTimeInterval = "timeInterval";
 
@@ -103,6 +110,45 @@ public class WTConfigHandler {
                 AllowModifyChatProfile(allow);
                 break;
             }
+            case _kWTConfigShowHomeButton: {
+                boolean value = (boolean) args.get(_cValue);
+                ShowHomeButton(value);
+                break;
+            }
+            case _kWTConfigSetChatBGColor: {
+                String value = (String) args.get(_cValue);
+                SetChatBGColor(value);
+                break;
+            }
+            case _kWTConfigSetChatHeaderColor: {
+                String value = (String) args.get(_cValue);
+                SetChatHeaderColor(value);
+                break;
+            }
+            case _kWTConfigSetChatTitleColor: {
+                String value = (String) args.get(_cValue);
+                SetChatTitleColor(value);
+                break;
+            }
+            case _kWTConfigSetFontNames: {
+                String fRegular = (String) args.get("regular");
+                String fBold = (String) args.get("bold");
+                String fLight = (String) args.get("light");
+                String fItalic = (String) args.get("italic");
+                String fMedium = (String) args.get("medium");
+
+
+                HashMap<String, String> fontNames = new HashMap<String, String>();
+                fontNames.put("regular", fRegular);
+                fontNames.put("bold", fBold);
+                fontNames.put("light", fLight);
+                fontNames.put("medium", fMedium);
+                fontNames.put("italic", fItalic);
+
+                SetFontNames(fontNames);
+                break;
+            }
+
             default: {
                 result.notImplemented();
                 break;
@@ -183,6 +229,33 @@ public class WTConfigHandler {
 
     private static void SetAgentQueueInterval(long timeIntervalInSeconds) {
         WTSDKManager.SetAgentQueueInterval(timeIntervalInSeconds);
+    }
+
+
+    private static void ShowHomeButton(boolean show) {
+        WTSDKManager.ShowHomeButton(show);
+    }
+
+
+    private static void SetExitButtonName(String value) {
+        WTSDKManager.SetExitButtonName(value);
+    }
+
+
+    private static void SetChatBGColor(String value) {
+        WTSDKManager.SetChatBGColor(value);
+    }
+
+    private static void SetChatHeaderColor(String value) {
+        WTSDKManager.SetChatHeaderColor(value);
+    }
+
+    private static void SetChatTitleColor(String value) {
+        WTSDKManager.SetChatTitleColor(value);
+    }
+
+    private static void SetFontNames(HashMap<String, String> fontNames) {
+        WTSDKManager.SetFontNames(fontNames);
     }
 
 }

@@ -42,3 +42,8 @@
 ## 0.0.12
 
 - Fixes
+
+## 0.0.13
+
+- Customize fonts
+- Customize chat bubble colors
