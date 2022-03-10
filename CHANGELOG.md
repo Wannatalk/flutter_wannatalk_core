@@ -47,3 +47,8 @@
 
 - Customize fonts
 - Customize chat bubble colors
+
+## 0.0.14
+
+- Customize fonts
+- Customize chat bubble colors
