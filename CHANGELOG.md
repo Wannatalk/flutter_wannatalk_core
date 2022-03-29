@@ -58,3 +58,9 @@
 - Customize fonts
 - Customize chat bubble colors
 - Bug fixes
+
+## 0.0.16
+
+- Customize fonts
+- Customize chat bubble colors
+- Bug fixes

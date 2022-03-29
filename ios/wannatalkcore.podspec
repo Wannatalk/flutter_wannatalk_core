@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'wannatalkcore'
-  s.version          = '0.0.13'
+  s.version          = '0.0.16'
   s.summary          = 'A new Flutter plugin.'
   s.description      = <<-DESC
 A new Flutter plugin.

@@ -8,7 +8,7 @@ Edit the `pubspec.yaml` file in your app directory to define the Wannatalk SDK d
 
 ```yaml
 dependencies:
-  wannatalkcore: ^0.0.15
+  wannatalkcore: ^0.0.16
 ```
 
 ## iOS Setup
