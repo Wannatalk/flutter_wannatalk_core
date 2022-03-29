@@ -571,6 +571,8 @@ static const  int _kWTEventTypeStore = 2005;
 //    public void loadStorePage(String userIdentifier, String storeID);
 
 - (void) wtsdkLoadProductPage:(NSString *) userIdentifier storeID:(NSString *) storeID productID:(NSString *) productID {
+    UIViewController *_rootViewController = [WannatalkcorePlugin GetWindowRootViewController];
+    NSLog(@"_rootViewController: %@", _rootViewController);
     [self sendP2PProductEvent:userIdentifier storeID:storeID productID: productID error: nil];
 }
 
@@ -582,7 +584,12 @@ static const  int _kWTEventTypeStore = 2005;
 }
 
 - (void) wtsdkLoadStorePage:(NSString *) userIdentifier storeID:(NSString *) storeID {
-    [self sendP2PStoreEvent: userIdentifier storeID: storeID error: nil];
+    UIViewController *_rootViewController = [WannatalkcorePlugin GetWindowRootViewController];
+    NSLog(@"_rootViewController: %@", _rootViewController);
+    [_rootViewController dismissViewControllerAnimated:YES completion:^{
+            
+        [self sendP2PStoreEvent: userIdentifier storeID: storeID error: nil];
+    }];
 }
 
 @end

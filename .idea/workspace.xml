@@ -3,54 +3,31 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2ef30389-7c55-4726-9e50-f3a4d3e3f96f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/assets/font/montserrat_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/assets/font/montserrat_light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/assets/font/montserrat_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/assets/font/montserrat_regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/font/montserrat_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/font/montserrat_light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/font/montserrat_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/font/montserrat_regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Fonts/montserrat_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Fonts/montserrat_light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Fonts/montserrat_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Fonts/montserrat_regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Fonts/montserrat_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Fonts/montserrat_light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Fonts/montserrat_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Fonts/montserrat_regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/wannatalk/wannatalkcore/WTConfigHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/wannatalk/wannatalkcore/WTConfigHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/android/app/src/main/assets/wannatalk-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/assets/wannatalk-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/android/src/main/java/com/wannatalk/wannatalkcore/WTConfigHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/android/src/main/java/com/wannatalk/wannatalkcore/WTConfigHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/wannatalk-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/android/app/src/main/assets/wannatalk-services.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/WTService-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/ios/Runner/WTService-Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WTConfigHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WTConfigHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WTConfigHandler.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WTConfigHandler.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/wannatalkcore.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/wannatalkcore.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WannatalkcorePlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/ios/Classes/WannatalkcorePlugin.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/lib/wannatalkcore.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/lib/wannatalkcore.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/wannatalkcore/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/Runner/WTService-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/WTService-Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/WTConfigHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/WTConfigHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/WTConfigHandler.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/WTConfigHandler.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/wannatalkcore.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/wannatalkcore.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Classes/WannatalkcorePlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/WannatalkcorePlugin.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/wannatalkcore.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wannatalkcore.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +37,19 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_XL_API_30]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="24raJE1ktrAdEf2LGXTMU69gogD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -71,11 +58,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/android/app/src/main/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="device.file.explorer" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -88,6 +80,7 @@
       <recent name="$PROJECT_DIR$/example/android/app/src/main" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -110,77 +103,40 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="WindowStateProjectService">
-    <state x="184" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1644391092337">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="184" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1440.813@0.25.1440.813" timestamp="1644391092337" />
-    <state width="1398" height="87" key="GridCell.Tab.0.bottom" timestamp="1646912191565">
-      <screen x="0" y="25" width="1440" height="815" />
-    </state>
-    <state width="1398" height="164" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1646778719691" />
-    <state width="1398" height="310" key="GridCell.Tab.0.bottom/0.25.1440.807@0.25.1440.807" timestamp="1646780070876" />
-    <state width="1398" height="164" key="GridCell.Tab.0.bottom/0.25.1440.813@0.25.1440.813" timestamp="1646777229246" />
-    <state width="1398" height="155" key="GridCell.Tab.0.bottom/0.25.1440.814@0.25.1440.814" timestamp="1646898526111" />
-    <state width="1398" height="87" key="GridCell.Tab.0.bottom/0.25.1440.815@0.25.1440.815" timestamp="1646912191565" />
-    <state width="1398" height="221" key="GridCell.Tab.0.bottom/0.25.1440.817@0.25.1440.817" timestamp="1646902586221" />
-    <state width="1398" height="87" key="GridCell.Tab.0.center" timestamp="1646912191565">
-      <screen x="0" y="25" width="1440" height="815" />
-    </state>
-    <state width="1398" height="164" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1646778719689" />
-    <state width="1398" height="310" key="GridCell.Tab.0.center/0.25.1440.807@0.25.1440.807" timestamp="1646780070875" />
-    <state width="1398" height="164" key="GridCell.Tab.0.center/0.25.1440.813@0.25.1440.813" timestamp="1646777229245" />
-    <state width="1398" height="155" key="GridCell.Tab.0.center/0.25.1440.814@0.25.1440.814" timestamp="1646898526111" />
-    <state width="1398" height="87" key="GridCell.Tab.0.center/0.25.1440.815@0.25.1440.815" timestamp="1646912191565" />
-    <state width="1398" height="221" key="GridCell.Tab.0.center/0.25.1440.817@0.25.1440.817" timestamp="1646902586221" />
-    <state width="1398" height="87" key="GridCell.Tab.0.left" timestamp="1646912191565">
-      <screen x="0" y="25" width="1440" height="815" />
-    </state>
-    <state width="1398" height="164" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1646778719687" />
-    <state width="1398" height="310" key="GridCell.Tab.0.left/0.25.1440.807@0.25.1440.807" timestamp="1646780070875" />
-    <state width="1398" height="164" key="GridCell.Tab.0.left/0.25.1440.813@0.25.1440.813" timestamp="1646777229245" />
-    <state width="1398" height="155" key="GridCell.Tab.0.left/0.25.1440.814@0.25.1440.814" timestamp="1646898526110" />
-    <state width="1398" height="87" key="GridCell.Tab.0.left/0.25.1440.815@0.25.1440.815" timestamp="1646912191565" />
-    <state width="1398" height="221" key="GridCell.Tab.0.left/0.25.1440.817@0.25.1440.817" timestamp="1646902586220" />
-    <state width="1398" height="87" key="GridCell.Tab.0.right" timestamp="1646912191565">
-      <screen x="0" y="25" width="1440" height="815" />
-    </state>
-    <state width="1398" height="164" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1646778719690" />
-    <state width="1398" height="310" key="GridCell.Tab.0.right/0.25.1440.807@0.25.1440.807" timestamp="1646780070875" />
-    <state width="1398" height="164" key="GridCell.Tab.0.right/0.25.1440.813@0.25.1440.813" timestamp="1646777229245" />
-    <state width="1398" height="155" key="GridCell.Tab.0.right/0.25.1440.814@0.25.1440.814" timestamp="1646898526111" />
-    <state width="1398" height="87" key="GridCell.Tab.0.right/0.25.1440.815@0.25.1440.815" timestamp="1646912191565" />
-    <state width="1398" height="221" key="GridCell.Tab.0.right/0.25.1440.817@0.25.1440.817" timestamp="1646902586221" />
-    <state x="412" y="184" width="615" height="490" key="find.popup" timestamp="1646779725441">
-      <screen x="0" y="25" width="1440" height="806" />
-    </state>
-    <state x="412" y="184" width="615" height="490" key="find.popup/0.25.1440.806@0.25.1440.806" timestamp="1646779725441" />
-    <state x="412" y="186" width="615" height="490" key="find.popup/0.25.1440.813@0.25.1440.813" timestamp="1644394058738" />
-    <state x="412" y="186" width="615" height="492" key="find.popup/0.25.1440.815@0.25.1440.815" timestamp="1645131629783" />
-    <state x="385" y="78" width="670" height="670" key="search.everywhere.popup" timestamp="1646779602711">
-      <screen x="0" y="25" width="1440" height="806" />
-    </state>
-    <state x="385" y="78" width="670" height="670" key="search.everywhere.popup/0.25.1440.806@0.25.1440.806" timestamp="1646779602711" />
-    <state x="385" y="79" width="670" height="676" key="search.everywhere.popup/0.25.1440.814@0.25.1440.814" timestamp="1646776119425" />
-    <state x="385" y="79" width="670" height="676" key="search.everywhere.popup/0.25.1440.815@0.25.1440.815" timestamp="1645131721989" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>147</line>
+          <line>148</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>155</line>
+          <line>156</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>125</line>
+          <line>126</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/wannatalkcore.dart</url>
+          <line>105</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -104,7 +104,7 @@ class Wannatalkcore {
     try {
 
       int eventType = call.arguments["eventType"];
-      bool success = call.arguments["success"] == 1;
+      bool success = call.arguments["success"] == 1 || call.arguments["success"] == true;
       String? error = call.arguments["error"];
 
       eventResponse.eventType = eventType;
