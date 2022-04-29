@@ -70,3 +70,7 @@
 - Customize fonts
 - Customize chat bubble colors
 - Bug fixes
+
+## 0.0.18
+
+- Image upload crash fix
