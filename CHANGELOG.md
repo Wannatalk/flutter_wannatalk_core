@@ -74,3 +74,7 @@
 ## 0.0.18
 
 - Image upload crash fix
+
+## 0.0.19
+
+- Hide phone number in topics list
