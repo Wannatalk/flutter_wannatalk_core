@@ -78,3 +78,7 @@
 ## 0.0.19
 
 - Hide phone number in topics list
+
+## 0.0.20
+
+- Fix: Display server name in topics list
