@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - wannatalkcore (0.0.20):
+  - wannatalkcore (0.0.21):
     - Flutter
     - WTExternalSDK (= 1.7.6)
   - WTExternalSDK (1.7.6)
@@ -26,7 +26,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  wannatalkcore: e9639bac84556330804f1dddaea7181e1f88ecea
+  wannatalkcore: d7cbfe0f2f1f087e6d8718e5b4935f054ba69b30
   WTExternalSDK: 9f540388b0c3a37d58a738d0abfd5a11b9f869ff
 
 PODFILE CHECKSUM: 8b68308388270aa7cefbff06f39fbf823f4aed75

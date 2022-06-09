@@ -82,3 +82,7 @@
 ## 0.0.20
 
 - Fix: Display server name in topics list
+
+## 0.0.21
+
+- Fix: Contacts reload issue
