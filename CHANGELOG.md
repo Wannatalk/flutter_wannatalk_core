@@ -86,3 +86,7 @@
 ## 0.0.21
 
 - Fix: Contacts reload issue
+
+## 0.0.22
+
+- API path and Hub path are required fields in config file

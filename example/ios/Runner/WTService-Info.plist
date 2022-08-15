@@ -3,10 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>WTAPIKey</key>
-	<string>&lt;api_key&gt;</string>
+	<string>&lt;your_api_key&gt;</string>
 	<key>WTAPIUsername</key>
-	<string>&lt;api_username&gt;</string>
+	<string>&lt;your_api_username&gt;</string>
 	<key>WTOrgHash</key>
-	<string>&lt;org_hash&gt;</string>
+	<string>&lt;your_org_hash&gt;</string>
+	<key>WTAPIPath</key>
+	<string>&lt;your_api_path&gt;</string>
+	<key>WTHubPath</key>
+	<string>&lt;your_hub_path&gt;</string>
 </dict>
 </plist>

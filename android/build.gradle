@@ -22,6 +22,10 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
+    signingConfigs {
+        release {
+        }
+    }
     compileSdkVersion 30
 
     defaultConfig {
@@ -36,7 +40,7 @@ android {
 dependencies {
 
 
-    implementation 'ai.wannatalk:wannatalksdk:1.4.1'
+    implementation 'ai.wannatalk:wannatalksdk:1.4.2'
 
     // implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
