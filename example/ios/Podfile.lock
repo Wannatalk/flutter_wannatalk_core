@@ -1,14 +1,14 @@
 PODS:
   - Flutter (1.0.0)
-  - wannatalkcore (0.0.22):
+  - wannatalkcore (0.0.23):
     - Flutter
-    - WTExternalSDK (= 1.7.7)
-  - WTExternalSDK (1.7.7)
+    - WTExternalSDK (= 1.7.8)
+  - WTExternalSDK (1.7.8)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - wannatalkcore (from `.symlinks/plugins/wannatalkcore/ios`)
-  - WTExternalSDK (from `https://github.com/edzehoo/WannatalkAPI-iOS.git`, tag `1.7.7`)
+  - WTExternalSDK (from `https://github.com/edzehoo/WannatalkAPI-iOS.git`, tag `1.7.8`)
 
 EXTERNAL SOURCES:
   Flutter:
@@ -17,18 +17,18 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wannatalkcore/ios"
   WTExternalSDK:
     :git: https://github.com/edzehoo/WannatalkAPI-iOS.git
-    :tag: 1.7.7
+    :tag: 1.7.8
 
 CHECKOUT OPTIONS:
   WTExternalSDK:
     :git: https://github.com/edzehoo/WannatalkAPI-iOS.git
-    :tag: 1.7.7
+    :tag: 1.7.8
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  wannatalkcore: dff20808a742d22baa3d181dc48cad2f8208c4dc
-  WTExternalSDK: 9024922f3ba276cf310c59a186a5c795de0a6d11
+  wannatalkcore: 1ac46fd3389ddd6559a235113af126035a42dd4e
+  WTExternalSDK: 1bd1f69085639795aa2272ae6f6e10babe35cf76
 
-PODFILE CHECKSUM: 9f772cb2abd6b685df5cd79b0357c9081e824a8c
+PODFILE CHECKSUM: 2fd81944f5ca1796344dceac92790a1761538cb5
 
 COCOAPODS: 1.11.2

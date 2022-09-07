@@ -90,3 +90,8 @@
 ## 0.0.22
 
 - API path and Hub path are required fields in config file
+
+
+## 0.0.23
+
+- Fixes
