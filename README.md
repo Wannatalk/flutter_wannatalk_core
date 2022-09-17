@@ -185,9 +185,11 @@ Wannatalkcore.setMethodCallHandler(onReceivedEvent:(WTEventResponse eventRespons
 
     String orgID = "your_organization_id";
     String channelID = "your_chat_channel_id";
-    String message = "Hi";
+    String message = "Hi"; // This message will be sent upon opening chat
+    String ticketName = "alpha"; // Ticket name
+    bool closeOldTickets = false; // If true, closes all active tickets, else opens existing active ticket
 
-    Wannatalkcore.contactOrganization(orgID, channelID, message, onCompletion: (WTResult result) {
+    Wannatalkcore.contactOrganization(orgID, channelID, ticketName, closeOldTickets, message, onCompletion: (WTResult result) {
       if (result.success) {
 
       }
