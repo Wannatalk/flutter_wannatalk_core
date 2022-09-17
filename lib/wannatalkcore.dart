@@ -173,6 +173,8 @@ class Wannatalkcore {
 
   static final  String _cIOrgID= "orgID";
   static final  String _cIChannelID= "channelID";
+  static final  String _cITicketName= "ticketName";
+  static final  String _cICloseOldTickets= "closeOldTickets";
   static final  String _cIMessage= "message";
 
   /// To check login status
@@ -261,10 +263,12 @@ class Wannatalkcore {
   }
 
   /// To contact organization
-  static Future<void> contactOrganization(String orgID, String channelID, String message, {required Function(WTResult result) onCompletion}) async {
+  static Future<void> contactOrganization(String orgID, String channelID, String ticketName, bool closeOldTickets, String message, {required Function(WTResult result) onCompletion}) async {
     _sendWannatalkMethod(_kWTContactOrg, <String, dynamic>{
       _cIOrgID: orgID,
       _cIChannelID: channelID,
+      _cITicketName: ticketName,
+      _cICloseOldTickets: closeOldTickets,
       _cIMessage: message
     }, onCompletion: onCompletion);
   }

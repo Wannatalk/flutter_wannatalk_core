@@ -98,6 +98,8 @@ static const  NSString * _Nonnull _cIStoreID= @"StoreID";
 
 static const  NSString * _Nonnull _cIOrgID= @"orgID";
 static const  NSString * _Nonnull _cIChannelID= @"channelID";
+static const  NSString * _Nonnull _cITicketName= @"ticketName";
+static const  NSString * _Nonnull _cICloseOldTickets= @"closeOldTickets";
 static const  NSString * _Nonnull _cIMessage= @"message";
 
 static const  int _kWTEventTypeLogin = 2001;
@@ -311,9 +313,12 @@ static const  int _kWTEventTypeStore = 2005;
     
     NSInteger orgID = [args[_cIOrgID] integerValue];
     NSInteger channelID = [args[_cIChannelID] integerValue];
+    NSString *ticketName = args[_cITicketName];
+    BOOL closeOldTickets = [args[_cICloseOldTickets] boolValue];
+
     NSString *message = args[_cIMessage];
     
-    [chatLoader sendMessage:message orgID:orgID channelID:channelID onCompletion:^(BOOL success, NSString *errorMessage) {
+    [chatLoader sendMessage:message orgID:orgID channelID:channelID ticketName:ticketName closeOldTickets:closeOldTickets onCompletion:^(BOOL success, NSString *errorMessage) {
     
         [self sendUserChatCallback:errorMessage];
     }];

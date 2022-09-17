@@ -146,6 +146,8 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
 
   static final  String _cIOrgID= "orgID";
   static final  String _cIChannelID= "channelID";
+  static final  String _cITicketName= "ticketName";
+  static final  String _cICloseOldTickets= "closeOldTickets";
   static final  String _cIMessage= "message";
 
 
@@ -484,7 +486,8 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     String message = (String) args.get(_cIMessage);
     String sOrgID = (String) args.get(_cIOrgID);
     String sChannelID = (String) args.get(_cIChannelID);
-
+    String ticketName = (String) args.get(_cITicketName);
+    boolean closeOldTickets = (boolean) args.get(_cICloseOldTickets);
     Integer orgID = Integer.valueOf(sOrgID);
     Integer channelID = Integer.valueOf(sChannelID);
 
@@ -496,7 +499,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
       return;
     }
 
-    WTChatLoader.sendMessage(message, orgID, channelID);
+    WTChatLoader.sendMessage(message, orgID, channelID, ticketName, closeOldTickets);
 
     if (result != null) {
       result.success(null);

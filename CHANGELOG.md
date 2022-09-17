@@ -99,3 +99,7 @@
 ## 0.0.24
 
 - allow open org chat
+
+## 0.0.25
+
+- allow open org chat

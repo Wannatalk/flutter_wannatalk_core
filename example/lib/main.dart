@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -76,7 +78,7 @@ class _MyAppState extends State<MyApp> {
     WannatalkConfig.allowAddParticipants(false);
     WannatalkConfig.enableAutoTickets(true);
 
-    WannatalkConfig.showExitButton(false);
+    WannatalkConfig.showExitButton(true);
     WannatalkConfig.showHomeButton(true);
     WannatalkConfig.enableChatProfile(false);
     WannatalkConfig.setChatHeaderColor("#1475a5");
@@ -213,11 +215,13 @@ class _MyAppState extends State<MyApp> {
 
   void contactOrganization() {
 
-    String orgID = "your_organization_id";
-    String channelID = "your_chat_channel_id";
-    String message = "Hi";
+    String orgID = "360";
+    String channelID = "399";
+    String message = "Hi"; // This message will be sent upon opening chat
+    String ticketName = "alpha"; // Ticket name
+    bool closeOldTickets = false; // If true, closes all active tickets, else opens existing active ticket
 
-    Wannatalkcore.contactOrganization(orgID, channelID, message, onCompletion: (WTResult result) {
+    Wannatalkcore.contactOrganization(orgID, channelID, ticketName, closeOldTickets, message, onCompletion: (WTResult result) {
       if (result.success) {
 
       }
