@@ -56,6 +56,7 @@ static const  NSString * _Nonnull _cWTUsername= @"username";
 static const  NSString * _Nonnull _cWTLocalImagePath= @"localImagePath";
 
 static const  NSString * _Nonnull _cWTAutoOpenChat= @"autoOpenChat";
+static const  NSString * _Nonnull _cWTAutoOpenChannelId= @"autoOpenChannelId";
 static const  NSString * _Nonnull _cWTUserIdentifier= @"userIdentifier";
 static const  NSString * _Nonnull _cWTUserInfo= @"userInfo";
 
@@ -127,7 +128,9 @@ static const  int _kWTEventTypeStore = 2005;
         }
         case _kWTOrgProfileMethod: {
             BOOL autoOpenChat = [args[_cWTAutoOpenChat] boolValue];
-            [self loadOrganizationProfile:autoOpenChat result:result];
+            NSInteger autoOpenChannelID = [args[_cWTAutoOpenChannelId] intValue];
+            
+            [self loadOrganizationProfile:autoOpenChat autoOpenChannelID: autoOpenChannelID result:result];
 
             break;
         }
@@ -278,11 +281,11 @@ static const  int _kWTEventTypeStore = 2005;
 
 #pragma mark -
 
-- (void)loadOrganizationProfile:(BOOL) autoOpenChat result:(FlutterResult) result {
+- (void)loadOrganizationProfile:(BOOL) autoOpenChat autoOpenChannelID:(NSInteger)autoOpenChannelID result:(FlutterResult) result {
     self.orgProfileResult = result;
 
     [WannatalkcorePlugin GetBaseViewController:^(UIViewController *baseViewController) {
-        [baseViewController presentOrgProfileVCWithAutoOpenChat:autoOpenChat delegate:self animated:YES completion:nil];
+        [baseViewController presentOrgProfileVCWithAutoOpenChat:autoOpenChat autoOpenChannelID:autoOpenChannelID delegate:self animated:YES completion:nil];
     }];
 
 }

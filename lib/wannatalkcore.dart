@@ -144,6 +144,7 @@ class Wannatalkcore {
 
 
   static const  String _cWTAutoOpenChat= "autoOpenChat";
+  static const  String _cWTAutoOpenChannelId= "autoOpenChannelId";
   static const  String _cWTUserIdentifier= "userIdentifier";
   static const  String _cWTUserInfo= "userInfo";
 
@@ -196,8 +197,8 @@ class Wannatalkcore {
     _sendWannatalkMethod(_kWTLogoutMethod, null, onCompletion: onCompletion);
   }
   /// To load your organization profile
-  static Future<void> loadOrganizationProfile(bool autoOpenChat, {required Function(WTResult result) onCompletion}) async {
-    _sendWannatalkMethod(_kWTOrgProfileMethod, <String, dynamic>{_cWTAutoOpenChat: autoOpenChat}, onCompletion: onCompletion);
+  static Future<void> loadOrganizationProfile(bool autoOpenChat, int autoOpenChanenlId, {required Function(WTResult result) onCompletion}) async {
+    _sendWannatalkMethod(_kWTOrgProfileMethod, <String, dynamic>{_cWTAutoOpenChat: autoOpenChat, _cWTAutoOpenChannelId: autoOpenChanenlId}, onCompletion: onCompletion);
   }
   /// To view all chats
   static Future<void> loadChats({required Function(WTResult result) onCompletion}) async {

@@ -8,7 +8,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+//        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.6.3'
     }
 }
 
@@ -16,6 +17,9 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 }
 
@@ -39,8 +43,7 @@ android {
 
 dependencies {
 
-
-    implementation 'ai.wannatalk:wannatalksdk:1.4.3'
+    implementation 'ai.wannatalk:wannatalksdk:1.4.5'
 
     // implementation 'com.google.firebase:firebase-messaging:22.0.0'
 

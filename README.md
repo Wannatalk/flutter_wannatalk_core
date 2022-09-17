@@ -8,7 +8,7 @@ Edit the `pubspec.yaml` file in your app directory to define the Wannatalk SDK d
 
 ```yaml
 dependencies:
-  wannatalkcore: ^0.0.23
+  wannatalkcore: ^0.0.24
 ```
 
 ## iOS Setup
@@ -29,7 +29,7 @@ dependencies:
    ```
 3. Add this line to your application pod file
 
-    `pod 'WTExternalSDK', :git =>'https://github.com/edzehoo/WannatalkAPI-iOS.git', :tag => '1.7.8'`
+    `pod 'WTExternalSDK', :git =>'https://github.com/edzehoo/WannatalkAPI-iOS.git', :tag => '1.7.9'`
 
 4. That's it! Run the app
 

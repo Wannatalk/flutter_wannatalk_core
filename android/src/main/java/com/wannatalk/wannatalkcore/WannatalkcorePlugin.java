@@ -105,6 +105,7 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
   static final  String _cWTLocalImagePath= "localImagePath";
 
   static final  String _cWTAutoOpenChat= "autoOpenChat";
+  static final  String _cWTAutoOpenChannelId= "autoOpenChannelId";
   static final  String _cWTUserIdentifier= "userIdentifier";
   static final  String _cWTUserInfo= "userInfo";
 //  static final  String _cWTChatMessage= "chatMessage";
@@ -199,7 +200,9 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
       }
       case _kWTOrgProfileMethod: {
         boolean autoOpenChat = (boolean) args.get(_cWTAutoOpenChat);
-        loadOrganizationProfile(autoOpenChat, result);
+        int autoOpenChannelId = (int) args.get(_cWTAutoOpenChannelId);
+
+        loadOrganizationProfile(autoOpenChat, autoOpenChannelId, result);
         break;
       }
       case _kWTChatListMethod: {
@@ -335,11 +338,11 @@ public class WannatalkcorePlugin implements FlutterPlugin, ActivityAware, Method
     }
   }
 
-  void loadOrganizationProfile(Boolean autoOpenChat,final Result result) {
+  void loadOrganizationProfile(Boolean autoOpenChat, int autoOpenChannelId, final Result result) {
     // Load organization profile
     Activity currentActivity = getActivity();
     if (currentActivity != null) {
-      WTSDKManager.LoadOrganizationActivity(currentActivity, autoOpenChat, new IWTCompletion() {
+      WTSDKManager.LoadOrganizationActivity(currentActivity, autoOpenChat, autoOpenChannelId, new IWTCompletion() {
         @Override
         public void onCompletion(boolean success, String error) {
           if (success) {

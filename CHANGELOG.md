@@ -95,3 +95,7 @@
 ## 0.0.23
 
 - Fixes
+
+## 0.0.24
+
+- allow open org chat

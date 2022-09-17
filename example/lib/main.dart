@@ -154,7 +154,7 @@ class _MyAppState extends State<MyApp> {
 
 
   void presentOrgProfile(bool autoOpenChat) {
-    Wannatalkcore.loadOrganizationProfile(autoOpenChat, onCompletion: (WTResult result){
+    Wannatalkcore.loadOrganizationProfile(autoOpenChat, 0, onCompletion: (WTResult result){
       if (result.success) {
 
       }
